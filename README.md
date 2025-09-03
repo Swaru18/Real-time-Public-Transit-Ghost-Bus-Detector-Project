@@ -1,4 +1,4 @@
-🚍 Real-time Public Transit "Ghost Bus" Detector 
+## 🚍 Real-time Public Transit "Ghost Bus" Detector 
 
 A real-time system that streams bus locations, compares them against schedule data (GTFS), and flags potential **ghost buses** (scheduled but missing/inactive vehicles). It ships with a live simulator, a FastAPI + WebSocket backend, and a React dashboard with map visualizations.
 
