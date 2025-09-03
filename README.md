@@ -172,10 +172,11 @@ Open [http://localhost:3000](http://localhost:3000)
 Swarangi Aher
 
 🎓 Bachelor’s in Information Technology
+
 💡 Passionate about Web Development & Data Analytics
 
 ---
 
 ## 🛡️ License
 
-MIT — see `LICENSE` (or choose one that fits your needs).
+MIT — see `LICENSE` 
