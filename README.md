@@ -21,14 +21,7 @@ A real-time system that streams bus locations, compares them against schedule da
 
 ---
 
-## 🖼️ Demo
-
-* **Video:** *Add your demo link here*
-* **Screenshot:** *Add a dashboard/map screenshot here*
-
----
-
-## 🗂️ Project Structure (your current layout)
+## 🗂️ Project Structure 
 
 ```
 GHOSTBUS/
@@ -56,8 +49,6 @@ GHOSTBUS/
 │── README.md
 │── .gitignore
 ```
-
-> **Note on spaces in folder names:** Your backend directory is named `backend app/` (with a space). On Windows shells, wrap it in quotes when `cd`-ing: `cd "backend app"`.
 
 ---
 
@@ -176,63 +167,12 @@ Open [http://localhost:3000](http://localhost:3000)
 
 ---
 
-## 🔧 Configuration
+👩‍💻 Author
 
-* **Redis host/port/db**: set in `ingest_sim.py` and `main.py` (defaults to `localhost:6379 db=0`).
-* **WebSocket path**: `/ws/vehicles` (frontend expects this).
-* **Map center/zoom**: configured per city in `src/App.js`.
-* **Ghost thresholds**: tune in `detection.py` (e.g., max stale seconds).
-
----
-
-## ✅ Verification Checklist
-
-* [ ] `redis-server` is running
-* [ ] `python ingest_sim.py` prints publishes (Pune/Ratnagiri)
-* [ ] `python main.py` starts backend on `127.0.0.1:8000`
-* [ ] Frontend opens on `localhost:3000` and markers appear
-* [ ] Switching city filter updates markers & stats
-
----
-
-## 🧩 Troubleshooting
-
-**`uvicorn : not recognized`**
-
-* Use module form: `python -m uvicorn main:app --reload`
-* Ensure you’re inside `"backend app"` where `main.py` lives
-* Install deps: `pip install fastapi uvicorn redis`
-
-**`ERROR: Could not import module "main"`**
-
-* You likely ran uvicorn from the wrong folder. `cd "backend app"` first.
-
-**No markers on the map**
-
-* Confirm WS connects (browser devtools → Network → WS)
-* Check simulator console for publishes
-* Ensure dropdown city matches incoming `v.city` (`pune`/`ratnagiri`)
-
-**Leaflet tiles not loading**
-
-* Check network errors/ad blockers
-* You can swap the tile URL in `MapView.js` if needed
-
----
-
-## 🗺️ Roadmap
-
-* Plug in real AVL/agency feeds (replace simulator)
-* Persist historical trips & generate reliability reports
-* GTFS-shapes matching & off-route detection
-* Notifications/alerts for agencies & riders
-* Mobile-friendly UI
-
----
-
-## 🤝 Contributing
-
-PRs and issues welcome! Please describe your environment and steps to reproduce.
+Swarangi Aher
+🎓 Bachelor’s in Information Technology
+💡 Passionate about Web Development & Data Analytics
+🌐 LinkedIn Profile
 
 ---
 
