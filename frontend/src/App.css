@@ -1,0 +1,103 @@
+/* Page layout */
+.gb-app {
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  background: #f6f7fb;
+  min-height: 100vh;
+  color: #222;
+}
+
+.gb-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 18px;
+  border-bottom: 1px solid #e7e9f1;
+  background: #fff;
+}
+
+.gb-header h1 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.gb-controls select {
+  padding: 6px 8px;
+  border: 1px solid #d0d3dd;
+  border-radius: 8px;
+  background: #fff;
+}
+
+/* Stats pills */
+.gb-stats {
+  display: flex;
+  gap: 10px;
+  padding: 12px 18px;
+  background: #fff;
+  border-bottom: 1px solid #e7e9f1;
+}
+
+.gb-pill {
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.gb-pill--all {
+  background: #eef2ff;
+  color: #3b5bfd;
+}
+
+.gb-pill--active {
+  background: #e7f7ec;
+  color: #17863e;
+}
+
+.gb-pill--ghost {
+  background: #ffe9ea;
+  color: #cc1f2f;
+}
+
+/* Search */
+.gb-search {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  background: #fff;
+  border-bottom: 1px solid #e7e9f1;
+}
+
+.gb-search input {
+  flex: 1;
+  max-width: 420px;
+  padding: 8px 10px;
+  border: 1px solid #d0d3dd;
+  border-radius: 8px;
+}
+
+.gb-search button {
+  padding: 8px 12px;
+  border: 1px solid #d0d3dd;
+  border-radius: 8px;
+  background: #fff;
+  cursor: pointer;
+}
+
+.gb-search-result {
+  margin-left: 10px;
+  font-size: 14px;
+  color: #333;
+}
+
+/* Map wrapper */
+.gb-map-wrap {
+  padding: 12px 18px 0 18px;
+}
+
+/* Footer */
+.gb-footer {
+  padding: 10px 18px 16px 18px;
+  color: #606576;
+}
