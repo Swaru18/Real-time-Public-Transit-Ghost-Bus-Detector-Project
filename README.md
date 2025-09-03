@@ -170,9 +170,9 @@ Open [http://localhost:3000](http://localhost:3000)
 👩‍💻 Author
 
 Swarangi Aher
+
 🎓 Bachelor’s in Information Technology
 💡 Passionate about Web Development & Data Analytics
-🌐 LinkedIn Profile
 
 ---
 
