@@ -70,7 +70,7 @@ GHOSTBUS/
 Open **three terminals** (plus Redis). Paths shown are from the repo root `GHOSTBUS/`.
 
 0) Start Redis
-```bash
+bash
 redis-server
 
 1) Run the vehicle simulator
