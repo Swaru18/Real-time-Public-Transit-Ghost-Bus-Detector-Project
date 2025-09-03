@@ -19,116 +19,100 @@ A real-time system that streams bus locations, compares them against schedule da
 ## 🗂️ Project Structure 
 
 GHOSTBUS/
-│── .venv/                      # optional virtual environment
 │── backend app/
-│   ├── __init__.py
-│   ├── detection.py            # ghost-bus heuristics
-│   ├── ingest_sim.py           # live vehicle simulator (Redis Pub/Sub)
-│   └── main.py                 # FastAPI + WebSocket server
+│ ├── detection.py # ghost-bus heuristics
+│ ├── ingest_sim.py # live vehicle simulator (Redis Pub/Sub)
+│ └── main.py # FastAPI + WebSocket server
 │
 │── frontend/
-│   ├── public/
-│   ├── src/
-│   │   ├── App.js
-│   │   ├── App.css
-│   │   ├── index.js
-│   │   └── components/
-│   │       ├── Dashboard.js
-│   │       ├── MapView.js
-│   │       └── SearchBar.js
-│   └── package.json
+│ ├── src/
+│ │ ├── App.js
+│ │ ├── App.css
+│ │ ├── index.js
+│ │ └── components/
+│ │ ├── Dashboard.js
+│ │ ├── MapView.js
+│ │ └── SearchBar.js
+│ └── package.json
 │
-│── logic/                      # (optional) extra rules/helpers
-│── websockethandler/           # (optional) ws helpers
 │── README.md
 │── .gitignore
-```
 
-⚙️ Tech Stack
 
-Frontend
+---
 
- React (Create React App)
- react-leaflet + leaflet (map)
- WebSocket client
+## ⚙️ Tech Stack
+**Frontend**  
+- React.js  
+- Leaflet (via react-leaflet)  
+- WebSocket client  
 
-Backend
+**Backend**  
+- FastAPI (Python)  
+- Uvicorn (ASGI server)  
+- Redis (Pub/Sub + vehicle state)  
 
- FastAPI (Python)
- Uvicorn (ASGI server)
- Redis (Pub/Sub + latest-vehicle state)
+**Data**  
+- **GTFS** (General Transit Feed Specification) schedules  
+- Simulated live GPS feeds (`ingest_sim.py`)  
 
-Data
+---
 
-GTFS (General Transit Feed Specification) schedules for trips/routes/stops
- Live vehicle telemetry (simulated by `ingest_sim.py`)
+## 📥 Prerequisites
+- **Python 3.10+**  
+- **Node.js 18+** & **npm**  
+- **Redis** server  
 
-📥 Prerequisites
+---
 
-Python 3.10+
-Node.js 18+ & npm
-Redis server running locally (or reachable remotely)
+## 🚀 Getting Started
 
-> Windows users: You can run Redis via WSL/Docker/Memurai. If you already have `redis-server` working, you’re good.
+Open **three terminals** (plus Redis). Paths shown are from the repo root `GHOSTBUS/`.
 
-🚀 Quick Start (Windows / macOS / Linux)
-
-Open three terminals (plus Redis). Paths shown are from the repo root `GHOSTBUS/`.
-
-0) Start Redis
-
-powershell
-If available natively
+### 0) Start Redis
+```bash
 redis-server
 
-1) Start the vehicle simulator
-
-powershell
+1) Run the vehicle simulator
 cd "backend app"
-(Optional) activate venv
-.venv\Scripts\activate   # Windows PowerShell
-source .venv/bin/activate # macOS/Linux
-
 pip install fastapi uvicorn redis
 python ingest_sim.py
 
-You should see lines like: `Published MH12_1234 (pune) ...` every \~2s.
+2) Start the backend
 
-2) Start the backend API/WebSocket server
+Option A (if main.py starts uvicorn itself):
 
-Option A (recommended, since `main.py` calls uvicorn for you):
-
-powershell
 cd "backend app"
 python main.py
 
 
-Option B (run uvicorn module directly):
+Option B (direct uvicorn run):
 
-powershell
 cd "backend app"
 python -m uvicorn main:app --reload
 
-
-Backend should report: `Uvicorn running on http://127.0.0.1:8000`.
-
 3) Start the frontend
-
-powershell
 cd frontend
 npm install
 npm install react-leaflet leaflet
 npm start
 
 
-Open [http://localhost:3000](http://localhost:3000)
+Open 👉 http://localhost:3000
 
-> The frontend connects to the backend WS at `ws://127.0.0.1:8000/ws/vehicles`. If you change the backend host/port, update it in `src/App.js`.
 
 🔍 How It Works
 
-1. Simulator (`ingest_sim.py`) publishes vehicle updates to Redis channel `vehicles:updates` and caches the latest state per vehicle in hashes (`vehicle:<id>`), with expiry.
-2. Backend (`main.py`) subscribes to Redis Pub/Sub and relays each message to browser clients over **WebSocket** (`/ws/vehicles`).
-3. Frontend (React) consumes the WS stream, normalizes fields, maintains an in-memory vehicle map, and renders markers on Leaflet. City filters/stats/search update live.
-4. Detection (`detection.py`) holds the heuristics to flag ghost buses (e.g., no updates for X seconds
+Simulator (ingest_sim.py) publishes vehicle updates to Redis (vehicles:updates) and stores latest state in hashes.
+Backend (main.py) listens on Redis and forwards updates to browsers over WebSockets (/ws/vehicles).
+Frontend (React) consumes WS messages, filters per city, and renders markers with Leaflet.
+Detection (detection.py) applies heuristics to identify ghost buses (missing, stale, off-route).
 
+🧠 GTFS Integration
+
+Place GTFS files (stops.txt, routes.txt, etc.) in ./gtfs/<agency>/.
+Parse schedules at startup → map routes, trips, and stop times.
+Runtime logic compares live buses with GTFS to detect:
+Missing vehicles → scheduled but absent
+Stale vehicles → no update for > X seconds
+Off-route → deviates from scheduled path
